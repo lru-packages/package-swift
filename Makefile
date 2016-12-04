@@ -10,9 +10,13 @@ DESCRIPTION="Swift is a general-purpose programming language built using a moder
 URL=https://swift.org
 RHEL=$(shell rpm -q --queryformat '%{VERSION}' centos-release)
 
+# https://swift.org/source-code/
+# http://www.swiftprogrammer.info/swift_centos_1.html
+
 #-------------------------------------------------------------------------------
 
-all: info clean install-deps compile install-tmp package move
+all: info clean install-deps compile
+# all: info clean install-deps compile install-tmp package move
 
 #-------------------------------------------------------------------------------
 
@@ -35,12 +39,13 @@ info:
 
 .PHONY: clean
 clean:
-	rm -Rf /tmp/installdir* swift*
+	rm -Rf /tmp/installdir* swift/ blocksruntime/ build/ clang/ cmark/ compiler-rt/ llbuild/ lldb/ llvm/
 
 #-------------------------------------------------------------------------------
 
 .PHONY: install-deps
 install-deps:
+
 	yum -y install \
 		clang \
 		clang-analyzer \
@@ -49,32 +54,44 @@ install-deps:
 		git \
 		icu \
 		libbsd-devel \
+		libcurl-devel \
 		libedit-devel \
 		libicu-devel \
 		libuuid-devel \
 		libxml2-devel \
 		ncurses-devel \
-		ncurses-lib \
 		ncurses-libs \
+		ninja-build \
+		openssl-devel \
 		pkgconfig \
 		python-devel \
+		python27-devel \
 		python3-devel \
 		sqlite-devel \
 		swig \
 		uuid-devel \
 	;
 
-	pip install --upgrade sphinx;
+	pip install --upgrade pip sphinx;
+
+	# Addresses the libblocksruntime-dev dependency for Ubuntu
+	git clone -q https://github.com/mackyle/blocksruntime.git --recursive;
+	cd blocksruntime && \
+		git checkout b5c5274daf1e0e46ecc9ad8f6f69889bce0a0a5d && \
+		./buildlib && \
+		./checktests && \
+		env prefix=$(PREFIX) ./installlib
+	;
 
 #-------------------------------------------------------------------------------
 
 .PHONY: compile
 compile:
-	git clone -q -b v$(COMMIT) https://github.com/apple/swift.git
+	git clone -q -b swift-$(VERSION)-RELEASE https://github.com/apple/swift.git
 	cd swift && \
-		autoconf && \
-		./configure --prefix=$(PREFIX) && \
-		make \
+		alternatives --install /usr/local/bin/cmake cmake /bin/cmake3 100 && \
+		./utils/update-checkout --clone && \
+		./utils/build-script -r -t \
 	;
 
 #-------------------------------------------------------------------------------
