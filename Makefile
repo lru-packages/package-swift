@@ -79,9 +79,14 @@ install-deps:
 	cd blocksruntime && \
 		git checkout b5c5274daf1e0e46ecc9ad8f6f69889bce0a0a5d && \
 		./buildlib && \
-		./checktests && \
 		env prefix=$(PREFIX) ./installlib
 	;
+
+	# Addresses the ninja-build dependency for Ubuntu
+	git clone -q -b release https://github.com/ninja-build/ninja.git;
+
+	# Make Cmake 3 the default for `cmake`
+	alternatives --install /usr/local/bin/cmake cmake /bin/cmake3 100
 
 #-------------------------------------------------------------------------------
 
@@ -89,7 +94,7 @@ install-deps:
 compile:
 	git clone -q -b swift-$(VERSION)-RELEASE https://github.com/apple/swift.git
 	cd swift && \
-		alternatives --install /usr/local/bin/cmake cmake /bin/cmake3 100 && \
+
 		./utils/update-checkout --clone && \
 		./utils/build-script -r -t \
 	;
