@@ -93,9 +93,6 @@ install-deps:
 	# Addresses the ninja-build dependency for Ubuntu
 	git clone -q -b release https://github.com/ninja-build/ninja.git;
 
-	# Make Cmake 3 the default for `cmake`
-	alternatives --install /usr/local/bin/cmake cmake /bin/cmake3 100
-
 #-------------------------------------------------------------------------------
 
 .PHONY: compile
