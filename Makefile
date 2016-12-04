@@ -1,5 +1,5 @@
 NAME=swift
-VERSION=2.2.1
+VERSION=3.0.1
 EPOCH=1
 ITERATION=1
 PREFIX=/usr/local
@@ -44,7 +44,24 @@ install-deps:
 	yum -y install \
 		clang \
 		clang-analyzer \
+		cmake \
+		gcc-c++ \
+		git \
+		icu \
+		libbsd-devel \
+		libedit-devel \
 		libicu-devel \
+		libuuid-devel \
+		libxml2-devel \
+		ncurses-devel \
+		ncurses-lib \
+		ncurses-libs \
+		pkgconfig \
+		python-devel \
+		python3-devel \
+		sqlite-devel \
+		swig \
+		uuid-devel \
 	;
 
 	pip install --upgrade sphinx;
