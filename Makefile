@@ -12,6 +12,7 @@ RHEL=$(shell rpm -q --queryformat '%{VERSION}' centos-release)
 
 # https://swift.org/source-code/
 # http://www.swiftprogrammer.info/swift_centos_1.html
+# https://github.com/FedoraSwift/fedora-swift
 
 #-------------------------------------------------------------------------------
 
@@ -46,10 +47,12 @@ clean:
 .PHONY: install-deps
 install-deps:
 
+	yum -y remove cmake;
+
 	yum -y install \
 		clang \
 		clang-analyzer \
-		cmake \
+		cmake3 \
 		gcc-c++ \
 		git \
 		icu \
@@ -59,9 +62,11 @@ install-deps:
 		libicu-devel \
 		libuuid-devel \
 		libxml2-devel \
+		llvm-ocaml-devel \
 		ncurses-devel \
 		ncurses-libs \
 		ninja-build \
+		ocaml \
 		openssl-devel \
 		pkgconfig \
 		python-devel \
@@ -71,6 +76,9 @@ install-deps:
 		swig \
 		uuid-devel \
 	;
+
+	cd /bin && \
+		ln -s ./cmake3 ./cmake;
 
 	pip install --upgrade pip sphinx;
 
@@ -95,7 +103,7 @@ compile:
 	git clone -q -b swift-$(VERSION)-RELEASE https://github.com/apple/swift.git;
 	cd swift && \
 		./utils/update-checkout --clone && \
-		./utils/build-script -r -t \
+		./utils/build-script -r \
 	;
 
 #-------------------------------------------------------------------------------
