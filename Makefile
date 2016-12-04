@@ -79,7 +79,7 @@ install-deps:
 	cd blocksruntime && \
 		git checkout b5c5274daf1e0e46ecc9ad8f6f69889bce0a0a5d && \
 		./buildlib && \
-		env prefix=$(PREFIX) ./installlib
+		env prefix=$(PREFIX) ./installlib \
 	;
 
 	# Addresses the ninja-build dependency for Ubuntu
@@ -92,9 +92,8 @@ install-deps:
 
 .PHONY: compile
 compile:
-	git clone -q -b swift-$(VERSION)-RELEASE https://github.com/apple/swift.git
+	git clone -q -b swift-$(VERSION)-RELEASE https://github.com/apple/swift.git;
 	cd swift && \
-
 		./utils/update-checkout --clone && \
 		./utils/build-script -r -t \
 	;
