@@ -39,7 +39,7 @@ info:
 
 .PHONY: clean
 clean:
-	rm -Rf /tmp/installdir* swift/ blocksruntime/ build/ clang/ cmark/ compiler-rt/ llbuild/ lldb/ llvm/
+	rm -Rf /tmp/installdir* swift*/ blocksruntime/ build/ clang/ cmark/ compiler-rt/ llbuild/ lldb/ llvm/ ninja/
 
 #-------------------------------------------------------------------------------
 
