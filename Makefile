@@ -26,6 +26,7 @@ all: info clean install-deps compile
 info:
 	@ echo "NAME:        $(NAME)"
 	@ echo "VERSION:     $(VERSION)"
+	@ echo "BUILD:       $(BUILD)"
 	@ echo "EPOCH:       $(EPOCH)"
 	@ echo "ITERATION:   $(ITERATION)"
 	@ echo "PREFIX:      $(PREFIX)"
