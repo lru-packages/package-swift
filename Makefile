@@ -1,5 +1,6 @@
 NAME=swift
-VERSION=3.0.1
+VERSION=3.0.2
+BUILD=PREVIEW-1
 EPOCH=1
 ITERATION=1
 PREFIX=/usr/local
@@ -97,7 +98,7 @@ install-deps:
 
 .PHONY: compile
 compile:
-	git clone -q -b swift-$(VERSION)-RELEASE https://github.com/apple/swift.git;
+	git clone -q -b swift-$(VERSION)-$(BUILD) https://github.com/apple/swift.git;
 	cd swift && \
 		./utils/update-checkout --clone && \
 		./utils/build-script -r \
