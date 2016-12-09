@@ -14,6 +14,7 @@ RHEL=$(shell rpm -q --queryformat '%{VERSION}' centos-release)
 # https://swift.org/source-code/
 # http://www.swiftprogrammer.info/swift_centos_1.html
 # https://github.com/FedoraSwift/fedora-swift
+# https://lists.swift.org/pipermail/swift-users/Week-of-Mon-20161205/004155.html
 
 #-------------------------------------------------------------------------------
 
