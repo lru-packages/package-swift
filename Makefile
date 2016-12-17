@@ -68,7 +68,6 @@ install-deps:
 		llvm-ocaml-devel \
 		ncurses-devel \
 		ncurses-libs \
-		ninja-build \
 		ocaml \
 		openssl-devel \
 		pkgconfig \
