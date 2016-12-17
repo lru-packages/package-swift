@@ -1,2 +1,2 @@
-* Sat Dec 3 2016 Ryan Parman <ryan@ryanparman.com> 3.0.1-1
-- Bundles Swift 3.0.1.
+* Sat Dec 17 2016 Ryan Parman <ryan@ryanparman.com> 3.0.2-1
+- Bundles Swift 3.0.2.
