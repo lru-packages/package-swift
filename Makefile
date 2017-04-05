@@ -1,8 +1,7 @@
 NAME=swift
-VERSION=3.0.2
+VERSION=3.1
 BUILD=RELEASE
-EPOCH=1
-ITERATION=1
+ITERATION=1.lru
 PREFIX=/usr/local
 LICENSE=Apache-2.0
 VENDOR="Swift Core Team"
@@ -28,7 +27,6 @@ info:
 	@ echo "NAME:        $(NAME)"
 	@ echo "VERSION:     $(VERSION)"
 	@ echo "BUILD:       $(BUILD)"
-	@ echo "EPOCH:       $(EPOCH)"
 	@ echo "ITERATION:   $(ITERATION)"
 	@ echo "PREFIX:      $(PREFIX)"
 	@ echo "LICENSE:     $(LICENSE)"
@@ -53,9 +51,7 @@ install-deps:
 	yum -y remove cmake;
 
 	yum -y install \
-		clang \
-		clang-analyzer \
-		cmake3 \
+		cmake \
 		gcc-c++ \
 		git \
 		icu \
@@ -65,7 +61,9 @@ install-deps:
 		libicu-devel \
 		libuuid-devel \
 		libxml2-devel \
+		llvm \
 		llvm-ocaml-devel \
+		ninja-build \
 		ncurses-devel \
 		ncurses-libs \
 		ocaml \
@@ -78,9 +76,6 @@ install-deps:
 		swig \
 		uuid-devel \
 	;
-
-	cd /bin && \
-		ln -s ./cmake3 ./cmake;
 
 	pip install --upgrade pip sphinx;
 
@@ -127,7 +122,6 @@ package:
 		-v $(VERSION) \
 		-C /tmp/installdir-$(NAME)-$(VERSION) \
 		-m $(MAINTAINER) \
-		--epoch $(EPOCH) \
 		--iteration $(ITERATION) \
 		--license $(LICENSE) \
 		--vendor $(VENDOR) \
@@ -154,7 +148,6 @@ package:
 		-v $(VERSION) \
 		-C /tmp/installdir-$(NAME)-$(VERSION) \
 		-m $(MAINTAINER) \
-		--epoch $(EPOCH) \
 		--iteration $(ITERATION) \
 		--license $(LICENSE) \
 		--vendor $(VENDOR) \
@@ -181,7 +174,6 @@ package:
 		-v $(VERSION) \
 		-C /tmp/installdir-$(NAME)-$(VERSION) \
 		-m $(MAINTAINER) \
-		--epoch 1 \
 		--iteration $(ITERATION) \
 		--license $(LICENSE) \
 		--vendor $(VENDOR) \
@@ -208,7 +200,6 @@ package:
 		-v $(VERSION) \
 		-C /tmp/installdir-$(NAME)-$(VERSION) \
 		-m $(MAINTAINER) \
-		--epoch 1 \
 		--iteration $(ITERATION) \
 		--license $(LICENSE) \
 		--vendor $(VENDOR) \
